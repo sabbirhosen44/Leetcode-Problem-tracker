@@ -53,16 +53,17 @@ export async function PUT(
 
     console.log("[v0] Updating problem:", id, "with data:", body);
 
-    const updateData = {
-      ...body,
-      summaryNotes: Array.isArray(body.summaryNotes)
-        ? body.summaryNotes.map((note: any) => ({
-            id: note.id || `${Date.now()}-${Math.random()}`,
-            content: note.content || note,
-            createdAt: note.createdAt || new Date(),
-          }))
-        : [],
-    };
+    // const updateData = {
+    //   ...body,
+    //   summaryNotes: Array.isArray(body.summaryNotes)
+    //     ? body.summaryNotes.map((note: any) => ({
+    //         id: note.id || `${Date.now()}-${Math.random()}`,
+    //         content: note.content || note,
+    //         createdAt: note.createdAt || new Date(),
+    //       }))
+    //     : [],
+    // };
+    const updateData = { ...body };
 
     const problem = await Problem.findByIdAndUpdate(id, updateData, {
       new: true,
